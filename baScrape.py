@@ -2,6 +2,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import requests
 import time
+import urllib
 
 '''Objective: 
 1. Iterate though all IPIlab Race, Gender, and Age options
@@ -9,20 +10,26 @@ import time
 3. Create "linked" meta data text file with all attached data
 '''
 
+PATH = "http://www.ipilab.org/BAAweb/"
+
 # Open webpage in Firefox browser
 driver = webdriver.Firefox()
-driver.get("http://www.ipilab.org/BAAweb/")
+driver.get(PATH)
 
 # Dropdown menu attributes, according to source code
 raceName = "Race"
 genderName = "Gender"
 ageName = "Age"
 
-raceVal = ['"ASI"', '"BLK"', '"CAU"', '"HIS"']
+# raceVal = ['"ASI"', '"BLK"', '"CAU"', '"HIS"']
+# genderVal = ['"F"', '"M"']
+# ageVal = ['"00"', '"01"', '"02"', '"03"', '"04"', '"05"', '"06"', '"07"', 
+# 		'"08"', '"09"', '"10"', '"11"', '"12"', '"13"', '"14"', '"15"', 
+# 		'"16"', '"17"', '"18"']
+
+raceVal = ['"ASI"', '"BLK"']
 genderVal = ['"F"', '"M"']
-ageVal = ['"00"', '"01"', '"02"', '"03"', '"04"', '"05"', '"06"', '"07"', 
-		'"08"', '"09"', '"10"', '"11"', '"12"', '"13"', '"14"', '"15"', 
-		'"16"', '"17"', '"18"']
+ageVal = ['"00"', '"01"', '"02"', '"03"', '"04"']
 
 # Iterate all dropdown attribute combinations (i.e BLK FEMALE 12)
 
@@ -44,12 +51,25 @@ for race in raceVal:
 			htmlSource = driver.page_source
 			soupObject = BeautifulSoup(htmlSource, 'html.parser')
 			# Find all image links and download
-			for item in soupObject.findAll('a'):
+			for link in soupObject.findAll('a'):
 				rawLink = link.get('href')[:-3]
 				landmark = rawLink.index("JPEG")
 				linkURL = rawLink[landmark:]
 				NAME = linkURL.rpartition('/')[0].rpartition('/')[2]
 				UID = linkURL.rpartition('/')[2][:4]
+
+				if race == '"ASI"':
+					destPATH = '/Users/alexgeorge/Dropbox/Python/codeNIH/Images/ASI/'
+				elif race == '"BLK"':
+					destPATH = '/Users/alexgeorge/Dropbox/Python/codeNIH/Images/BLK/'
+				elif race == '"CAU"':
+					destPATH = '/Users/alexgeorge/Dropbox/Python/codeNIH/Images/CAU/'
+				elif race == '"HIS"':
+					destPATH = '/Users/alexgeorge/Dropbox/Python/codeNIH/Images/HIS/'
+
+				urllib.urlretrieve(PATH+linkURL, destPATH+ NAME + '_' + UID + '.jpg')
+
+				print NAME+UID
 				#print(link.get('href')[:-3])
 
 
