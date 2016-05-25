@@ -21,16 +21,12 @@ raceName = "Race"
 genderName = "Gender"
 ageName = "Age"
 
-# raceVal = ['"ASI"', '"BLK"', '"CAU"', '"HIS"']
-# genderVal = ['"F"', '"M"']
-# ageVal = ['"00"', '"01"', '"02"', '"03"', '"04"', '"05"', '"06"', '"07"', 
-# 		'"08"', '"09"', '"10"', '"11"', '"12"', '"13"', '"14"', '"15"', 
-# 		'"16"', '"17"', '"18"']
+raceVal = ['"ASI"', '"BLK"', '"CAU"', '"HIS"']
+genderVal = ['"F"', '"M"']
+ageVal = ['"00"', '"01"', '"02"', '"03"', '"04"', '"05"', '"06"', '"07"', 
+ 		'"08"', '"09"', '"10"', '"11"', '"12"', '"13"', '"14"', '"15"', 
+ 		'"16"', '"17"', '"18"']
 
-raceVal = ['"BLK"']
-genderVal = ['"F"']
-#ageVal = ['"00"', '"01"', '"02"', '"03"', '"04"']
-ageVal = ['"00"']
 
 # Iterate all dropdown attribute combinations (i.e BLK FEMALE 12)
 
@@ -68,34 +64,35 @@ for race in raceVal:
 				UID = linkURL.rpartition('/')[2][:4]
 
 				if race == '"ASI"':
-					destPATH = '/Users/alexgeorge/Dropbox/Python/codeNIH/Images/ASI/'
+					destPATH = 'C:\\Users\\ipladmin\\Documents\\codeNIH\\pyProjects\\ASI\\'
 				elif race == '"BLK"':
-					destPATH = '/Users/alexgeorge/Dropbox/Python/codeNIH/Images/BLK/'
+					destPATH = 'C:\\Users\\ipladmin\\Documents\\codeNIH\pyProjects\\BLK\\'
 				elif race == '"CAU"':
-					destPATH = '/Users/alexgeorge/Dropbox/Python/codeNIH/Images/CAU/'
+					destPATH = 'C:\\Users\\ipladmin\\Documents\\codeNIH\\pyProjects\\CAU\\'
 				elif race == '"HIS"':
-					destPATH = '/Users/alexgeorge/Dropbox/Python/codeNIH/Images/HIS/'
+					destPATH = 'C:\\Users\\ipladmin\\Documents\\codeNIH\\pyProjects\\HIS\\'
 
-				metaID = UID
-				metaRace = "Race: " + str(metaData[1 + i*12])
-				metaGender = "Gender: " + str(metaData[2 + i*12])
-				metChr = "Chronological Age: " + str(metaData[3 + i*12])
-				metaDOB = "DOB: " + str(metaData[4 + i*12])
-				metaExam = "Exam Date: " + str(metaData[5 + i*12])
-				metaTanner = "Tanner: " + str(metaData[6 + i*12])
-				metaHeight = "Height (cm): " + str(metaData[7 + i*12])
-				metaWeight = "Weight (kg): " + str(metaData[8 + i*12])
-				metaTrunk = "Trunk Height (cm): " + str(metaData[9 + i*12])
-				metaRead1 = "Reading 1: " + str(metaData[10 + i*12])
-				metaRead2 = "Reading 2: " + str(metaData[11 + i*12])
+				metaID = "ID: " + UID + '\n'
+				metaRace = "Race: " + str(metaData[1 + i*12]) + '\n'
+				metaGender = "Gender: " + str(metaData[2 + i*12]) + '\n'
+				metaChr = "Chronological Age: " + str(metaData[3 + i*12]) + '\n'
+				metaDOB = "DOB: " + str(metaData[4 + i*12]) + '\n'
+				metaExam = "Exam Date: " + str(metaData[5 + i*12]) + '\n'
+				metaTanner = "Tanner: " + str(metaData[6 + i*12]) + '\n'
+				metaHeight = "Height (cm): " + str(metaData[7 + i*12]) + '\n'
+				metaWeight = "Weight (kg): " + str(metaData[8 + i*12]) + '\n'
+				metaTrunk = "Trunk Height (cm): " + str(metaData[9 + i*12]) + '\n'
+				metaRead1 = "Reading 1: " + str(metaData[10 + i*12]) + '\n'
+				metaRead2 = "Reading 2: " + str(metaData[11 + i*12]) + '\n'
 				
 
-				#urllib.urlretrieve(PATH+linkURL, destPATH+ NAME + '_' + UID + '.jpg')
+				urllib.urlretrieve(PATH+linkURL, destPATH + NAME + '_' + UID + '.jpg')
+				textFile = open(destPATH + NAME + '_' + UID + '.txt', 'w')
+				textFile.write(metaID + metaRace + metaGender + metaChr + metaDOB + metaExam + metaTanner + metaHeight + metaWeight + metaTrunk + metaRead1 + metaRead2)
+				textFile.close()
 				i += 1
 
 			print '\n'
-			# for item in metaData:
-			# 	print item
 
 
 driver.quit()
