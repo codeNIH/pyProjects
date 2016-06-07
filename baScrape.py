@@ -17,15 +17,15 @@ driver = webdriver.Firefox()
 driver.get(PATH)
 
 # Dropdown menu attributes, according to source code
-raceName = "Race"
-genderName = "Gender"
-ageName = "Age"
+raceName 	= "Race"
+genderName 	= "Gender"
+ageName		= "Age"
 
-raceVal = ['"ASI"', '"BLK"', '"CAU"', '"HIS"']
-genderVal = ['"F"', '"M"']
-ageVal = ['"00"', '"01"', '"02"', '"03"', '"04"', '"05"', '"06"', '"07"', 
- 		'"08"', '"09"', '"10"', '"11"', '"12"', '"13"', '"14"', '"15"', 
- 		'"16"', '"17"', '"18"']
+raceVal 	= ['"ASI"', '"BLK"', '"CAU"', '"HIS"']
+genderVal 	= ['"F"', '"M"']
+ageVal 		= ['"00"', '"01"', '"02"', '"03"', '"04"', '"05"', '"06"', '"07"', 
+ 				'"08"', '"09"', '"10"', '"11"', '"12"', '"13"', '"14"', '"15"', 
+ 				'"16"', '"17"', '"18"']
 
 
 # Iterate all dropdown attribute combinations (i.e BLK FEMALE 12)
